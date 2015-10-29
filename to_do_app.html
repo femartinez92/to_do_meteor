@@ -1,0 +1,48 @@
+<head>
+  <title>Todo List</title>
+</head>
+
+<body>
+  <div class="container">
+    <header>
+      <h1>Cosas pendientes ( {{incompleteCount}} )</h1>
+      <div>
+        {{> hide_completed}}
+      </div>
+      <div>
+        {{> loginButtons}}
+      </div>
+      {{#if currentUser}}
+        {{> add_task}}
+      {{/if}}
+    </header>
+    <ul>
+      {{#each tasks}}
+        {{> task}}
+      {{/each}}
+    </ul>
+  </div>
+  <footer>Tutorial to do meteor de: <a href="https://www.meteor.com/tutorials/blaze">https://www.meteor.com/tutorials/blaze</a></footer>
+</body>
+
+<template name="task">
+  <li class="{{#if checked}}checked{{/if}}">
+    <button class="delete">&times;</button>
+    <input type="checkbox" checked="{{checked}}" class="toggle-checked" />
+    <span class="text"><strong>{{username}}</strong> - {{text}}</span>
+  </li>
+  <p>{{description}}</p>
+</template>
+<template name="add_task">
+  <form class="new-task">
+    <input type="text" name="text" placeholder="Type to add new tasks" />
+    <input type="text" name="description" placeholder="Description" />
+    <input type="submit" value="Submit" />
+  </form>
+</template>
+<template name="hide_completed">
+  <label class="hide-completed">
+    <input type="checkbox" checked="{{hideCompleted}}" class="hide-completed"/>
+    Hide Completed Tasks
+  </label>
+</template>
